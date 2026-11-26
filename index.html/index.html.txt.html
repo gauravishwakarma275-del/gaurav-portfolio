@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaurav Vishwakarma | Video Editor & 3D Artist</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #e10600;
+    --black: #0b0b0b;
+    --paper: #f2efe8;
+  }
+
+  body {
+    background-color: var(--black);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 6px 6px;
+    color: var(--paper);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Grunge noise overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.4) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0 1px, transparent 1px 4px);
+    z-index: 999;
+  }
+
+  a { color: inherit; }
+  header, section { padding: 90px 8%; position: relative; }
+
+  /* HERO */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    background: radial-gradient(circle at 75% 40%, #3a0000 0%, var(--black) 65%);
+  }
+  .hero-text { flex: 1; min-width: 300px; }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -1px;
+    text-shadow: 4px 4px 0 var(--red);
+  }
+  .hero h1 span { color: var(--paper); }
+  .role {
+    margin-top: 24px;
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    padding: 8px 18px;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transform: rotate(-2deg);
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  /* Photo with torn-tape look */
+  .photo-wrap {
+    position: relative;
+    transform: rotate(3deg);
+  }
+  .photo-wrap img {
+    width: 320px;
+    max-width: 100%;
+    display: block;
+    border: 6px solid var(--paper);
+    box-shadow: 14px 14px 0 var(--red);
+    filter: contrast(1.15) grayscale(0.2);
+  }
+  .photo-wrap::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 110px;
+    height: 28px;
+    background: rgba(242,239,232,0.75);
+    transform: translateX(-50%) rotate(-4deg);
+    z-index: 2;
+  }
+
+  /* Big stamp like reference */
+  .stamp {
+    position: absolute;
+    right: 6%;
+    top: 12%;
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: clamp(3rem, 10vw, 8rem);
+    color: var(--red);
+    border: 6px solid var(--red);
+    padding: 0 18px;
+    transform: rotate(8deg);
+    opacity: 0.85;
+    letter-spacing: 4px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* Section heading with comic label */
+  h2 {
+    display: inline-block;
+    background: var(--paper);
+    color: var(--black);
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    padding: 6px 22px;
+    margin-bottom: 34px;
+    transform: rotate(-1.5deg);
+    box-shadow: 6px 6px 0 var(--red);
+    font-weight: 900;
+  }
+
+  p { max-width: 760px; color: #d4d0c8; }
+
+  /* Skills as stickers */
+  .skills { display: flex; flex-wrap: wrap; gap: 16px; }
+  .tag {
+    border: 3px solid var(--red);
+    background: var(--black);
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 0 var(--paper);
+  }
+  .tag:nth-child(odd) { transform: rotate(-2deg); }
+  .tag:nth-child(even) { transform: rotate(2deg); }
+
+  /* Projects as comic panels */
+  .projects { display: grid; gap: 44px; }
+  .project {
+    background: #141414;
+    border: 3px solid var(--paper);
+    padding: 34px;
+    position: relative;
+    box-shadow: 10px 10px 0 var(--red);
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 5px 5px;
+  }
+  .project:nth-child(even) { transform: rotate(0.6deg); }
+  .project:nth-child(odd) { transform: rotate(-0.6deg); }
+
+  .project .software {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+  }
+  .project h3 {
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    margin: 14px 0 12px;
+    color: var(--paper);
+  }
+  .project p { color: #cfcac0; margin-bottom: 14px; }
+
+  .project a.watch {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--paper);
+    color: var(--black);
+    padding: 10px 24px;
+    text-decoration: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--red);
+    transition: transform 0.15s;
+  }
+  .project a.watch:hover { transform: translate(-2px, -2px); }
+
+  /* Contact */
+  .contact {
+    background: var(--red);
+    text-align: center;
+    clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  .contact h2 { background: var(--black); color: var(--paper); box-shadow: 6px 6px 0 #fff; }
+  .contact p { color: #fff; margin: 0 auto 10px; }
+  .contact a { font-size: 1.3rem; font-weight: 900; text-decoration: none; color: #fff; border-bottom: 3px solid #fff; }
+
+  footer {
+    text-align: center;
+    padding: 28px;
+    background: #000;
+    color: #777;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 700px) {
+    header, section { padding: 70px 6%; }
+    .hero { text-align: center; justify-content: center; }
+    .role { transform: none; }
+    .stamp { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="stamp">PORTFOLIO</div>
+  <div class="hero-text">
+    <h1>Gaurav<br><span>Vishwakarma</span></h1>
+    <p class="role">Video Editor &bull; 3D Artist</p>
+  </div>
+  <div class="photo-wrap">
+    <img src="images/gaurav.jpg" alt="Gaurav Vishwakarma">
+  </div>
+</header>
+
+<section id="about">
+  <h2>About</h2>
+  <p>Main ek video editor aur 3D artist hoon. Brand films, social media content, YouTube intros aur cinematic 3D visuals banata hoon. Premiere Pro mein editing aur Blender mein 3D animation mera main kaam hai.</p>
+</section>
+
+<section id="skills">
+  <h2>Skills &amp; Software</h2>
+  <div class="skills">
+    <span class="tag">Adobe Premiere Pro</span>
+    <span class="tag">Adobe After Effects</span>
+    <span class="tag">Autodesk Maya</span>
+    <span class="tag">Blender</span>
+    <span class="tag">Video Editing</span>
+    <span class="tag">3D Animation</span>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+
+    <div class="project">
+      <span class="software">Premiere Pro</span>
+      <h3>Brand Intro Video: Mihikoli</h3>
+      <p>Maharashtrian culture se inspired seafood restaurant ke naye outlet ke liye cinematic brand intro. AI-driven transitions se smooth visual flow aur modern presentation di, aur brand ki coastal identity ko bana kar rakha.</p>
+      <a class="watch" href="YOUR_VIDEO_LINK" target="_blank">Video Dekhein</a>
+    </div>
+
+    <div class="project">
+      <span class="software">Premiere Pro</span>
+      <h3>Brand Film: Mejwani Maharashtrachi</h3>
+      <p>Maharashtrian khane aur restaurant ambience ko mila kar bani cinematic brand film. Close-up food shots aur wide ambience frames se nostalgia aur hospitality dikhayi gayi. AI-generated voice-over aur background music se storytelling mazboot hui.</p>
+      <a class="watch" href="YOUR_VIDEO_LINK" target="_blank">Video Dekhein</a>
+    </div>
+
+    <div class="project">
+      <span class="software">Premiere Pro</span>
+      <h3>BTS Content: ID Fresh Food</h3>
+      <p>Kamchukarrr Social Media Agency ke saath ID Fresh Food brand campaign ka behind-the-scenes footage shoot kiya. End-to-end post-production (editing aur optimization) kiya, jo brand guidelines aur social media engagement ke hisaab se tha.</p>
+      <a class="watch" href="YOUR_VIDEO_LINK" target="_blank">Video Dekhein</a>
+    </div>
+
+    <div class="project">
+      <span class="software">Premiere Pro</span>
+      <h3>Asahi Ramen: Cinematic ASMR Food Film</h3>
+      <p>Ramen banane ki prakriya ko ASMR style mein dikhaya. Soft lighting, macro framing aur natural kitchen sounds (ubalta paani, bartan, ingredients) se calm aur realistic experience banaya, bina trending audio ke.</p>
+      <a class="watch" href="YOUR_VIDEO_LINK" target="_blank">Video Dekhein</a>
+    </div>
+
+    <div class="project">
+      <span class="software">Blender</span>
+      <h3>YouTube Intro Animation: Brightgen</h3>
+      <p>Class 11th aur 12th ke students ke liye educational YouTube channel Brightgen ka 3D intro. Clean visuals, smooth motion aur modern learning vibe pe focus kiya.</p>
+      <a class="watch" href="YOUR_VIDEO_LINK" target="_blank">Video Dekhein</a>
+    </div>
+
+    <div class="project">
+      <span class="software">Blender</span>
+      <h3>Black Hole Simulation &amp; Retro TV Animation</h3>
+      <p>Interstellar film ki visual style se inspired hokar realistic black hole simulation banaya, jisme gravitational distortion, accretion disk lighting aur cinematic space environment shamil hain. Iske saath ek stylized retro TV animation bhi banayi.</p>
+      <a class="watch" href="YOUR_VIDEO_LINK" target="_blank">Video Dekhein</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <p>Kaam ke liye contact karein:</p>
+  <p><a href="mailto:your-email@example.com">your-email@example.com</a></p>
+  <p><a href="tel:+910000000000">+91 00000 00000</a></p>
+</section>
+
+<footer>
+  &copy; 2026 Gaurav Vishwakarma. All rights reserved.
+</footer>
+
+</body>
+</html>
